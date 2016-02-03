@@ -28,16 +28,6 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 		</dependency>
 
@@ -53,8 +43,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.jrue.poc.springjdbc</groupId>
-			<artifactId>springjdbc</artifactId>
+			<groupId>org.jrue.poc.persistenence</groupId>
+			<artifactId>springmybatis</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
