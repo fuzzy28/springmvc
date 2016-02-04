@@ -35,7 +35,7 @@ public class HomeControllerTest {
 		Map<String,Object> model = new HashMap<String,Object>();
 		String view = controller.showHomePage(model);
 		
-		Assert.assertEquals("home", view);
+		Assert.assertEquals("jsp/home", view);
 		
 		Assert.assertSame(users, model.get("users"));
 		Mockito.verify(userService).findAll();

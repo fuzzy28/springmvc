@@ -21,6 +21,6 @@ public class HomeController {
 	@RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
 	public String showHomePage(Map<String,Object> model) {
 		model.put("users", userService.findAll());
-		return "home";
+		return "th/home";
 	}
 }
