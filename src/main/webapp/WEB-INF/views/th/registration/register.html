@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration</title>
+</head>
+<body>
+	<form method="POST">
+		<div align="center">
+			<h2>Register new User</h2>
+			<table th:object="${user}">
+				<tr>
+					<td>Name</td>
+					<td><input type="text" th:value="*{name}" name="name" /></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password" /></td>
+				</tr>
+				<tr>
+					<td>Confirm Password</td>
+					<td><input type="password" name="confirmpassword" /></td>
+				</tr>
+				<tr>
+					<td>Employee ID</td>
+					<td><input type="text" th:value="*{employeeId}"
+						name="employeeId" /></td>
+				</tr>
+				<tr>
+					<td>Department Name</td>
+					<td><input type="text" th:value="*{departmentName}"
+						name="departmentName" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button type="submit">Create</button>
+						<button type="reset">Clear</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</form>
+</body>
+</html>

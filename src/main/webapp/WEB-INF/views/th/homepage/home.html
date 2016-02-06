@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+</head>
+<body>
+	<div align="center">
+		<h2>List of Users</h2>
+		<table border="1">
+			<tr>
+				<th>Seq</th>
+				<th>Name</th>
+				<th>Employee ID</th>
+				<th>Department Type</th>
+				<th colspan="2"></th>
+			</tr>
+			<tr th:each="user,seq_no : ${users}">
+				<td th:text="${seq_no.count}">1</td>
+				<td th:text="${user.name}">Joel Ruelos</td>
+				<td th:text="${user.employeeId}">123312</td>
+				<td th:text="${user.departmentName}">Software Development
+					Department 1</td>
+				<td><a href="#" th:href="@{/update/} + ${user.id}">Update</a></td>
+				<td><a href="#" th:href="@{/delete/} + ${user.id}" onclick="return confirm('Are you sure you want to remove this user?')">Delete</a></td>
+			</tr>
+		</table>
+		<a href="#" th:href="@{/register?new}">Register</a>
+	</div>
+</body>
+</html>
