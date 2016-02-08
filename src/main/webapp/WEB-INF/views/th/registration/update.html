@@ -7,30 +7,16 @@
 <body>
 	<form method="POST" th:object="${user}">
 		<div align="center">
-			<h2>Update User <span th:text="${name}">Joel</span></h2>
+			<h2>
+				Update User <span th:text="${name}">Joel</span>
+			</h2>
+			<table th:replace="fragments/userRegistration :: body">
+				<tr>
+					<td>Field 1</td>
+					<td><input type="text" /></td>
+				</tr>
+			</table>
 			<table>
-				<tr>
-					<td>Name</td>
-					<td><input type="text" th:value="*{name}" name="name" /></td>
-				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password" th:value="*{password}" /></td>
-				</tr>
-				<tr>
-					<td>Confirm Password</td>
-					<td><input type="password" name="confirmpassword" th:value="*{password}" /></td>
-				</tr>
-				<tr>
-					<td>Employee ID</td>
-					<td><input type="text" th:value="*{employeeId}"
-						name="employeeId" /></td>
-				</tr>
-				<tr>
-					<td>Department Name</td>
-					<td><input type="text" th:value="*{departmentName}"
-						name="departmentName" /></td>
-				</tr>
 				<tr>
 					<td></td>
 					<td>

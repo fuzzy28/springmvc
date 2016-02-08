@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Home</title>
+</head>
+<body>
+	<a th:href="@{/home}" href="#">Back</a>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" th:value="*{name}" name="name" /></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password"
+				th:value="*{password}" /></td>
+		</tr>
+		<tr>
+			<td>Confirm Password</td>
+			<td><input type="password" name="confirmpassword"
+				th:value="*{password}" /></td>
+		</tr>
+		<tr>
+			<td>Employee ID</td>
+			<td><input type="text" th:value="*{employeeId}"
+				name="employeeId" /></td>
+		</tr>
+		<tr>
+			<td>Department Name</td>
+			<td><input type="text" th:value="*{departmentName}"
+				name="departmentName" /></td>
+		</tr>
+	</table>
+</body>
+</html>

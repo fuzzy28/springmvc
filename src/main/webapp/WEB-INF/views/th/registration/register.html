@@ -8,29 +8,13 @@
 	<form method="POST">
 		<div align="center">
 			<h2>Register new User</h2>
-			<table th:object="${user}">
+			<table th:replace="fragments/userRegistration :: body">
 				<tr>
-					<td>Name</td>
-					<td><input type="text" th:value="*{name}" name="name" /></td>
+					<td>Field 1</td>
+					<td><input type="text"/></td>
 				</tr>
-				<tr>
-					<td>Password</td>
-					<td><input type="password" name="password" /></td>
-				</tr>
-				<tr>
-					<td>Confirm Password</td>
-					<td><input type="password" name="confirmpassword" /></td>
-				</tr>
-				<tr>
-					<td>Employee ID</td>
-					<td><input type="text" th:value="*{employeeId}"
-						name="employeeId" /></td>
-				</tr>
-				<tr>
-					<td>Department Name</td>
-					<td><input type="text" th:value="*{departmentName}"
-						name="departmentName" /></td>
-				</tr>
+			</table>
+			<table>
 				<tr>
 					<td></td>
 					<td>
