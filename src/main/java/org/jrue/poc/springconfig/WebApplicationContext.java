@@ -3,8 +3,8 @@ package org.jrue.poc.springconfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
@@ -15,7 +15,8 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("org.jrue.poc.springmvc.controller")
-public class WebApplicationContext extends WebMvcConfigurerAdapter {
+@Import(SecurityContext.class)
+public class WebApplicationContext {
 	
 	/**
 	 * Constant Variables
