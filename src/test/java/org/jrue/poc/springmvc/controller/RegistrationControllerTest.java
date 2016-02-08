@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 
 public class RegistrationControllerTest {
 
-	
 	@Test
 	public void whenUserClickNewUserThenShowRegistrationForm() {
 		UserService userService = Mockito.mock(UserService.class);
