@@ -6,6 +6,9 @@
 </head>
 <body>
 	<div align="center">
+		<h1>
+			Hello <span sec:authentication="name">User</span>!
+		</h1>
 		<h2>List of Users</h2>
 		<form th:action="@{/logout}" action="#" method="POST">
 			<input type="submit" value="Logout" />
@@ -16,7 +19,9 @@
 				<th>Name</th>
 				<th>Employee ID</th>
 				<th>Department Type</th>
-				<th colspan="2"></th>
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+					<th colspan="2"></th>
+				</div>
 			</tr>
 			<tr th:each="user,seq_no : ${users}">
 				<td th:text="${seq_no.count}">1</td>
@@ -24,11 +29,19 @@
 				<td th:text="${user.employeeId}">123312</td>
 				<td th:text="${user.departmentName}">Software Development
 					Department 1</td>
-				<td><a href="#" th:href="@{/update/} + ${user.id}">Update</a></td>
-				<td><a href="#" th:href="@{/delete/} + ${user.id}" onclick="return confirm('Are you sure you want to remove this user?')">Delete</a></td>
+				<div sec:authorize="hasRole('ROLE_ADMIN')">
+				<td>
+					<a href="#" th:href="@{/update/} + ${user.id}">Update</a>
+				</td>
+				<td><a href="#" th:href="@{/delete/} + ${user.id}"
+					onclick="return confirm('Are you sure you want to remove this user?')">Delete</a></td>
+				</div>
 			</tr>
 		</table>
-		<a href="#" th:href="@{/register?new}">Register</a>
+		<span sec:authorize="hasRole('ROLE_ADMIN')"> <a href="#"
+			th:href="@{/register?new}">Register</a>
+		</span>
+
 	</div>
 </body>
 </html>
