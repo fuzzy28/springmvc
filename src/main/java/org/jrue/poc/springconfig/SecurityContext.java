@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityContext extends WebSecurityConfigurerAdapter {
 
 	@Override
-	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+	public void configure(AuthenticationManagerBuilder auth) throws Exception {		
 		auth.inMemoryAuthentication()
 			.withUser("JOEL").password("12345").roles("ADMIN","USER").and()
 			.withUser("USER").password("12345").roles("USER");
@@ -24,6 +24,7 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
 			.antMatchers("/register/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/update/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers("/**").access("hasRole('ROLE_USER')")
-			.and().formLogin().and().logout().permitAll();
+			.and()
+			.formLogin().and().logout().permitAll();
 	}
 }
