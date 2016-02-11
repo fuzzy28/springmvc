@@ -5,7 +5,7 @@
 <title>Registration</title>
 </head>
 <body>
-	<form method="POST" th:object="${user}">
+	<form method="POST" th:object="${user}" th:action="@{/update/} + *{id}">
 		<div align="center">
 			<h2>
 				Update User <span th:text="${name}">Joel</span>

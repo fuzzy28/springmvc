@@ -19,7 +19,8 @@
 				<th>Name</th>
 				<th>Employee ID</th>
 				<th>Department Type</th>
-				<th colspan="2" th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"></th>
+				<th colspan="2"
+					th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"></th>
 			</tr>
 			<tr th:each="user,seq_no : ${users}">
 				<td th:text="${seq_no.count}">1</td>
@@ -30,14 +31,14 @@
 				<td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
 					<a href="#" th:href="@{/update/} + ${user.id}">Update</a>
 				</td>
-				<td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"><a href="#" th:href="@{/delete/} + ${user.id}"
+				<td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}"><a
+					href="#" th:href="@{/delete/} + ${user.id}"
 					onclick="return confirm('Are you sure you want to remove this user?')">Delete</a></td>
 			</tr>
 		</table>
 		<span sec:authorize="hasRole('ROLE_ADMIN')"> <a href="#"
 			th:href="@{/register?new}">Register</a>
 		</span>
-
 	</div>
 </body>
 </html>

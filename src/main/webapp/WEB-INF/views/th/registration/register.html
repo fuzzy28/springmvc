@@ -5,7 +5,7 @@
 <title>Registration</title>
 </head>
 <body>
-	<form method="POST">
+	<form method="POST" th:action="@{/register}">
 		<div align="center">
 			<h2>Register new User</h2>
 			<table th:replace="fragments/userRegistration :: body">
