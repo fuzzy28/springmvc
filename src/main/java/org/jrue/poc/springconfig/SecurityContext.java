@@ -1,35 +1,45 @@
 package org.jrue.poc.springconfig;
 
-import javax.sql.DataSource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.jrue.poc.springmybatis.service.UserService;
+import org.jrue.poc.springmybatis.service.UserServiceImpl;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityContext extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private DataSource dataSource;
+	@Bean
+	public UserService userService() {
+		return new UserServiceImpl();
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public RememberMeServices rememberMeServices() {
+		TokenBasedRememberMeServices rememberMe =
+				new TokenBasedRememberMeServices("springmvckey", userService());
+		rememberMe.setParameter("rememberMe");
+		return rememberMe;
+	}
 	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {	
-		//if using in memory authentication
-//		auth.inMemoryAuthentication()
-//			.withUser("JOEL").password("12345").roles("ADMIN","USER").and()
-//			.withUser("USER").password("12345").roles("USER");
-		
-		//if using database authentication
-		auth.jdbcAuthentication()
-			.dataSource(dataSource)		
-			.usersByUsernameQuery("SELECT name as username,password,CASE WHEN delflag = 0 THEN 1 ELSE 0 END "
-					+ "as enabled FROM M_USER WHERE UPPER(name) = UPPER(?)")
-			.authoritiesByUsernameQuery("SELECT NAME AS username,ROLENAME FROM M_USERROLE MUR JOIN M_USER MU "
-					+ "ON MU.ID = MUR.USERID JOIN M_ROLE MR ON MUR.ROLEID = MR.ROLEID WHERE UPPER(name) = UPPER(?)");
+		auth
+			.userDetailsService(userService())
+			.passwordEncoder(passwordEncoder());
 	}
 	
 	@Override
@@ -52,8 +62,8 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
 				.logoutUrl("/logout")
 				.permitAll()
 			.and()
-				.rememberMe()				
-				.key("springmvckey");
+				.rememberMe()
+				.rememberMeServices(rememberMeServices());
 	}
-
+	
 }

@@ -25,6 +25,7 @@ public class WebApplicationContext {
 	private static final String VIEWS = "/WEB-INF/views/th/";
 	private static final String EXT_TH = ".html";
 
+	
 	/**
 	 * View Resolver for Thymeleaf pages.
 	 */
