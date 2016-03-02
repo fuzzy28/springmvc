@@ -13,6 +13,7 @@
 					<td colspan="2">
 						<span th:if="${param.error}">Invalid Username and Password.</span>
 						<span th:if="${param.logout}">You have been logged out.</span>
+						<span th:if="${param.sessionExpired}">Your session has been expired.</span>						
 					</td>
 				</tr>
 				<tr>

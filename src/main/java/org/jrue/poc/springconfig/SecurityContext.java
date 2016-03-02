@@ -63,7 +63,12 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
 				.permitAll()
 			.and()
 				.rememberMe()
-				.rememberMeServices(rememberMeServices());
+				.rememberMeServices(rememberMeServices())
+			.and()
+				.sessionManagement()
+				.invalidSessionUrl("/signin?sessionExpired")
+				.maximumSessions(1)
+				.expiredUrl("/signin?sessionExpired");
 	}
 	
 }
