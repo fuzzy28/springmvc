@@ -1,23 +1,45 @@
 package org.jrue.poc.springconfig;
 
+import org.jrue.poc.springmybatis.service.UserService;
+import org.jrue.poc.springmybatis.service.UserServiceImpl;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.RememberMeServices;
+import org.springframework.security.web.authentication.rememberme.TokenBasedRememberMeServices;
 
 @Configuration
 @EnableWebMvcSecurity
 public class SecurityContext extends WebSecurityConfigurerAdapter {
 
+	@Bean
+	public UserService userService() {
+		return new UserServiceImpl();
+	}
+	
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+	
+	@Bean
+	public RememberMeServices rememberMeServices() {
+		TokenBasedRememberMeServices rememberMe =
+				new TokenBasedRememberMeServices("springmvckey", userService());
+		rememberMe.setParameter("rememberMe");
+		return rememberMe;
+	}
+	
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {	
-		//if using in memory authentication
-		auth.inMemoryAuthentication()
-			.withUser("JOEL").password("12345").roles("ADMIN","USER").and()
-			.withUser("USER").password("12345").roles("USER");
-		//if using database authentication
-		
+		auth
+			.userDetailsService(userService())
+			.passwordEncoder(passwordEncoder());
 	}
 	
 	@Override
@@ -38,6 +60,10 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
 			.and()
 				.logout()
 				.logoutUrl("/logout")
-				.permitAll();
+				.permitAll()
+			.and()
+				.rememberMe()
+				.rememberMeServices(rememberMeServices());
 	}
+	
 }
