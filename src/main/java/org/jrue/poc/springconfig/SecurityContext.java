@@ -38,6 +38,11 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {	
 		auth
+			.inMemoryAuthentication()
+			.withUser("admin")
+			.password("admin")
+			.authorities("ROLE_ADMIN","ROLE_USER");
+		auth
 			.userDetailsService(userService())
 			.passwordEncoder(passwordEncoder());
 	}
