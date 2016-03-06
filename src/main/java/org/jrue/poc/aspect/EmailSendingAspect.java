@@ -31,9 +31,9 @@ public class EmailSendingAspect {
 
 	@Autowired
 	MimeMessageHelper mimeMessageHelper;
-
+	
 	@Around("execution(* *.registerNewUser(..))")
-	public String onCreatingNewUser(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	public String onCreatingNewUserAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		Object returnVal = proceedingJoinPoint.proceed();
 		User user = (User) proceedingJoinPoint.getArgs()[0];
 		Map<String, Object> mapModel = new HashMap<>();
