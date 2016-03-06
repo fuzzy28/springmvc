@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect;
 import org.thymeleaf.spring4.SpringTemplateEngine;
@@ -20,10 +21,11 @@ import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 import org.thymeleaf.templateresolver.TemplateResolver;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("org.jrue.poc")
 @Import({ SecurityContext.class, EmailSendingAspect.class, EmailContext.class })
+@EnableWebMvc
 @EnableAspectJAutoProxy
+@EnableAsync(proxyTargetClass=true)
 public class WebApplicationContext {
 
 	/**
